@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutPoint.Application", "Out
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutPoint.Domain", "OutPoint.Domain\OutPoint.Domain.csproj", "{AAAC6862-236E-42A4-BA8A-D26DA186A21E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutPoint.Persistance", "OutPoint.Persistance\OutPoint.Persistance.csproj", "{D9E52BC5-E344-45F6-80F2-3B9272E47BAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutPoint.Persistence", "OutPoint.Persistence\OutPoint.Persistence.csproj", "{D9E52BC5-E344-45F6-80F2-3B9272E47BAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutPoint.API", "OutPoint.API\OutPoint.API.csproj", "{7011E01E-5184-4106-83EC-336A1EAEA58F}"
 EndProject

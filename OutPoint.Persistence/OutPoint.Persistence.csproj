@@ -8,9 +8,15 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\OutPoint.Application\OutPoint.Application.csproj" />
       <ProjectReference Include="..\OutPoint.Domain\OutPoint.Domain.csproj" />
     </ItemGroup>
 
