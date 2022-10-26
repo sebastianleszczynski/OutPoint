@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using OutPoint.Application.Responses;
 using OutPoint.Domain.Entities;
-using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace OutPoint.Application.Features.UserFeature.Commands;
 
@@ -49,11 +48,11 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, BaseCom
             authClaims.Add(new Claim(ClaimTypes.Role, role));
         }
         
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:ApiToken"]));
         var token = new JwtSecurityToken(  
             issuer: _configuration["JWT:ValidIssuer"],  
             audience: _configuration["JWT:ValidAudience"],  
-            expires: DateTime.Now.AddHours(3),  
+            expires: DateTime.Now.AddHours(1),
             claims: authClaims,  
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)  
         );

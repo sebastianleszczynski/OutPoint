@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OutPoint.Application.Features.UserFeature.Commands;
 using OutPoint.Application.Features.UserFeature.Queries;
@@ -17,6 +18,7 @@ namespace OutPoint.API.Controllers
         }
         
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _mediator.Send(new UserGetAllQuery()));
@@ -27,7 +29,7 @@ namespace OutPoint.API.Controllers
         {
             var result = await _mediator.Send(new UserGetByEmailQuery {Email = email});
             
-            if(result == null)
+            if(result.Email == null)
             {
                 return BadRequest("No user found");
             }
