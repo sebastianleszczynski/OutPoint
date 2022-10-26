@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OutPoint.Application.Features.UserFeature.Commands;
 using OutPoint.Application.Features.UserFeature.Queries;
 
 namespace OutPoint.API.Controllers
@@ -23,9 +19,40 @@ namespace OutPoint.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediator.Send(new UserGetAllQuery());
+            return Ok(await _mediator.Send(new UserGetAllQuery()));
+        }
 
+        [HttpGet("{email}")]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            var result = await _mediator.Send(new UserGetByEmailQuery {Email = email});
+            
+            if(result == null)
+            {
+                return BadRequest("No user found");
+            }
+            
             return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register(UserRegisterCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (result.Success == false)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login()
+        {
+            return Ok();
         }
     }
 }

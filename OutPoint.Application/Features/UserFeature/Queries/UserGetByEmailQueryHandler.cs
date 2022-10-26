@@ -6,22 +6,25 @@ using OutPoint.Application.Interfaces;
 
 namespace OutPoint.Application.Features.UserFeature.Queries;
 
-public class UserGetAllQueryHandler : IRequestHandler<UserGetAllQuery, IEnumerable<UserDtoQuery>>
+public class UserGetByEmailQueryHandler : IRequestHandler<UserGetByEmailQuery, UserDtoQuery>
 {
     private readonly IOutPointIdentityDbContext _identityDbContext;
     private readonly IMapper _mapper;
 
-    public UserGetAllQueryHandler(IOutPointIdentityDbContext identityDbContext, IMapper mapper)
+    public UserGetByEmailQueryHandler(IOutPointIdentityDbContext identityDbContext, IMapper mapper)
     {
         _identityDbContext = identityDbContext;
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<UserDtoQuery>> Handle(UserGetAllQuery request, CancellationToken cancellationToken)
+    public async Task<UserDtoQuery> Handle(UserGetByEmailQuery request, CancellationToken cancellationToken)
     {
         var userListDb = await _identityDbContext.ApiUsers.ToListAsync();
-        var userListDto = _mapper.Map<List<UserDtoQuery>>(userListDb);
+        var userDb = userListDb.FirstOrDefault(u => u.Email == request.Email);
+        
+        
+        var userDto = _mapper.Map<UserDtoQuery>(userDb);
 
-        return userListDto.AsReadOnly();
+        return userDto;
     }
 }

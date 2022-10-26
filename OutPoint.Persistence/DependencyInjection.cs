@@ -21,6 +21,6 @@ public static class DependencyInjection
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<OutPointIdentityDbContext>();
 
-        services.AddScoped<IOutPointIdentityDbContext>(p => p.GetService<OutPointIdentityDbContext>());
+        services.AddScoped<IOutPointIdentityDbContext>(p => p.GetService<OutPointIdentityDbContext>()!);
     }
 }

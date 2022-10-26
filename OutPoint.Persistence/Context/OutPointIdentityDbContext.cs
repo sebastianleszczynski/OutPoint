@@ -12,7 +12,7 @@ public class OutPointIdentityDbContext : IdentityDbContext<ApiUser>, IOutPointId
     {
     }
     
-    public DbSet<ApiUser> ApiUsers { get; set; }
+    public DbSet<ApiUser> ApiUsers { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
