@@ -9,13 +9,11 @@ namespace OutPoint.Application.Features.UserFeature.Commands;
 
 public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, BaseCommandResponse>
 {
-    private readonly IOutPointIdentityDbContext _identityDbContext;
     private readonly IMapper _mapper;
     private readonly UserManager<ApiUser> _userManager;
 
-    public UserRegisterCommandHandler(IOutPointIdentityDbContext identityDbContext, IMapper mapper, UserManager<ApiUser> userManager)
+    public UserRegisterCommandHandler(IMapper mapper, UserManager<ApiUser> userManager)
     {
-        _identityDbContext = identityDbContext;
         _mapper = mapper;
         _userManager = userManager;
     }

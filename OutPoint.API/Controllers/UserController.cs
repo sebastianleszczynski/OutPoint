@@ -50,9 +50,15 @@ namespace OutPoint.API.Controllers
         
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(UserLoginCommand command)
         {
-            return Ok();
+            var result = await _mediator.Send(command);
+
+            if (result.Success == false)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }
